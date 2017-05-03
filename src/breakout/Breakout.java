@@ -16,11 +16,11 @@ public class Breakout extends JFrame {
     }
 
     private void initGUI() {
-        add(new Board());
+        add(new Frame());
         setTitle("Game Test");
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(Commons.WIDTH, Commons.HEIGHT);
+        setSize(Constants.WIDTH, Constants.HEIGHT);
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);

@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Created by richa on 4/25/2017.
  */
-public class Ball extends Sprite implements Commons {
+public class Ball extends Sprite implements Constants {
 
     private int xDir;
     private int yDir;

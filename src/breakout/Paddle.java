@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 /**
  * Created by richa on 4/25/2017.
  */
-public class Paddle extends Sprite implements Commons {
+public class Paddle extends Sprite implements Constants {
 
     private int dx;
 
