@@ -5,12 +5,12 @@ import javax.swing.*;
 /**
  * Created by richa on 4/25/2017.
  */
-public class Ball extends Sprite implements Constants {
+class Ball extends Sprite implements Constants {
 
     private int xDir;
     private int yDir;
 
-    public Ball() {
+    Ball() {
         xDir = 1;
         yDir = -1;
 
@@ -23,7 +23,7 @@ public class Ball extends Sprite implements Constants {
         resetState();
     }
 
-    public void move() {
+    void move() {
 
         x += xDir;
         y += yDir;
@@ -43,11 +43,11 @@ public class Ball extends Sprite implements Constants {
         y = INIT_BALL_Y;
     }
 
-    public void setXDir(int x){
+    void setXDir(int x){
         xDir = x;
     }
 
-    public void setYDir(int y){
+    void setYDir(int y){
         yDir = y;
     }
 

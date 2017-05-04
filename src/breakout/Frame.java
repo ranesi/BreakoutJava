@@ -19,6 +19,7 @@ public class Frame extends JPanel implements Constants {
     private Paddle paddle;
     private Brick[] bricks;
     private int score;
+    private int counter;
     private boolean ingame = true;
     private boolean win = false;
 
@@ -31,8 +32,10 @@ public class Frame extends JPanel implements Constants {
         addKeyListener(new TAdapter());
         setFocusable(true);
 
-        score = 0;
+        score = 100;
+        counter = 0;
         bricks = new Brick[BRICK_NUM];
+        setBackground(Color.WHITE);
         setDoubleBuffered(true);
         timer = new Timer();
         timer.scheduleAtFixedRate(new ScheduleTask(), DELAY, PERIOD);
@@ -49,8 +52,8 @@ public class Frame extends JPanel implements Constants {
         paddle = new Paddle();
 
         int k = 0;
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 6; j ++) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 8; j ++) {
                 bricks[k] = new Brick(j * 40 + 30, i * 10 + 50);
                 k++;
             }
@@ -63,6 +66,7 @@ public class Frame extends JPanel implements Constants {
 
         Graphics2D g2d = (Graphics2D) g;
 
+        // makes everything look very slightly better (mostly text)
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
@@ -83,8 +87,8 @@ public class Frame extends JPanel implements Constants {
 
         // draw score
         g2d.drawString("Score: " + Integer.toString(score),
-                (Constants.WIDTH / fm.stringWidth("Score: " + Integer.toString(score)) / 2) + 5,
-                Constants.HEIGHT - 20);
+                (Constants.WIDTH / fm.stringWidth("Score: " + Integer.toString(score))) / 2,
+                Constants.HEIGHT / 2 + 160);
         g2d.drawImage(ball.getImage(), ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight(), this);
         g2d.drawImage(paddle.getImage(), paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight(), this);
 
@@ -133,7 +137,11 @@ public class Frame extends JPanel implements Constants {
             paddle.move();
             checkCollision();
             repaint();
-            score += 1;
+            counter++;
+            if (counter == 250){
+                score--;
+                counter = 0;
+            }
         }
 
         private void stopGame() {

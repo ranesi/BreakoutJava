@@ -24,7 +24,6 @@ public class Breakout extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
-        setBackground(Color.WHITE);
     }
 
     public static void main(String[] args) {
