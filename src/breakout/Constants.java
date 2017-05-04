@@ -4,6 +4,8 @@ package breakout;
  * Created by richa on 4/25/2017.
  */
 public interface Constants {
+
+    /////////GAME STUFF//////////
     int WIDTH = 400;
     int HEIGHT = 400;
     int BOTTOM_EDGE = 390;
@@ -14,4 +16,11 @@ public interface Constants {
     int INIT_BALL_Y = 300;
     int DELAY = 1000;
     int PERIOD = 5;
+    /////////////////////////////
+
+    /////////DB STUFF////////////
+    String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
+    String DB_URL = "jdbc:mysql://localhost:3306/";
+    String DB_USER = "ranesi";
+    String DB_AUTH_FILE = "info.txt";
 }

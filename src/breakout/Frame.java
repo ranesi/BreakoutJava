@@ -66,10 +66,6 @@ public class Frame extends JPanel implements Constants {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        // makes everything look very slightly better (mostly text)
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-
         if (ingame)
             drawObjects(g2d);
         else

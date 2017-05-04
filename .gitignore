@@ -1,0 +1,9 @@
+*.txt
+ball.png.bak
+brick.png.bak
+out/production/Breakout/breakout/Constants.class
+out/production/Breakout/breakout/Frame$1.class
+out/production/Breakout/breakout/Frame$ScheduleTask.class
+out/production/Breakout/breakout/Frame$TAdapter.class
+out/production/Breakout/breakout/Frame.class
+paddle.png.bak
