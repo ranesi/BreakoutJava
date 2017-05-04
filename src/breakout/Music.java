@@ -18,6 +18,7 @@ public class Music extends Thread {
             smooth.open(ais);
             smooth.start();
 
+            // from stackoverflow -> http://stackoverflow.com/questions/36212563
             while(!smooth.isRunning())
                 Thread.sleep(10);
             while(smooth.isRunning())
