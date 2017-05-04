@@ -30,6 +30,7 @@ public class Paddle extends Sprite implements Constants {
     }
 
     public void keyPressed(KeyEvent e) {
+        //key listener; determine movement etc.
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT)
