@@ -20,6 +20,7 @@ public interface Constants {
 
     /////////DB STUFF////////////
     String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
+    String DB_NAME = "breakout";
     String DB_URL = "jdbc:mysql://localhost:3306/";
     String DB_USER = "ranesi";
     String DB_AUTH_FILE = "info.txt";
