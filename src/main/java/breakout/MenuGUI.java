@@ -51,9 +51,7 @@ public class MenuGUI extends JFrame {
             });
         });
 
-        updateButton.addActionListener(e -> {
-            updateTable();
-        });
+        updateButton.addActionListener(e -> updateTable());
 
         quitButton.addActionListener(e -> Main.shutdownProgram());
     }
