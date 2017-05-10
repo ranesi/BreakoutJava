@@ -11,15 +11,13 @@ import java.awt.event.WindowListener;
 
 public class Breakout extends JFrame implements WindowListener {
 
-    //VERY STRONGLY based on the example provided at http://zetcode.com/tutorials/javagamestutorial/breakout/
-
     Breakout() {
         initGUI();
     }
 
     private void initGUI() {
         add(new Game());
-        setTitle("Game Test");
+        setTitle("Breakout 2k7");
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(Constants.WIDTH, Constants.HEIGHT);
