@@ -1,26 +1,25 @@
 package breakout;
 
-/**
- * Created by richa on 4/25/2017.
- */
+import javax.swing.*;
 
-import javax.swing.ImageIcon;
 
 public class Brick extends Sprite {
 
+    //VERY STRONGLY based on the example provided at http://zetcode.com/tutorials/javagamestutorial/breakout/
+
     private boolean destroyed;
 
-    public Brick(int x, int y) {
+    public Brick(int x, int y, boolean destroyed) {
         this.x = x;
         this.y = y;
 
         ImageIcon ii = new ImageIcon("brick.png");
         image = ii.getImage();
 
-        i_width = image.getWidth(null);
-        i_height = image.getHeight(null);
+        iWidth = image.getWidth(null);
+        iHeight = image.getHeight(null);
 
-        destroyed = false;
+        this.destroyed = destroyed;
     }
 
     public boolean isDestroyed() {
@@ -32,3 +31,4 @@ public class Brick extends Sprite {
     }
 
 }
+

@@ -6,17 +6,19 @@ import java.awt.event.KeyEvent;
 /**
  * Created by richa on 4/25/2017.
  */
-public class Paddle extends Sprite implements Constants {
+public class Bat extends Sprite implements Constants {
+
+    //VERY STRONGLY based on the example provided at http://zetcode.com/tutorials/javagamestutorial/breakout/
 
     private int dx;
 
-    public Paddle() {
+    public Bat() {
 
         ImageIcon ii = new ImageIcon("paddle.png");
         image = ii.getImage();
 
-        i_width = image.getWidth(null);
-        i_height = image.getHeight(null);
+        iWidth = image.getWidth(null);
+        iHeight = image.getHeight(null);
 
         resetState();
     }
@@ -25,8 +27,8 @@ public class Paddle extends Sprite implements Constants {
         x += dx;
         if (x <= 0)
             x = 0;
-        if (x >= WIDTH - i_width)
-            x = WIDTH - i_width;
+        if (x >= WIDTH - iWidth)
+            x = WIDTH - iWidth;
     }
 
     public void keyPressed(KeyEvent e) {

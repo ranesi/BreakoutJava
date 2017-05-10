@@ -4,19 +4,21 @@ package breakout;
  * Created by richa on 4/25/2017.
  */
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class Breakout extends JFrame {
 
-    //Copied from zetcode.com/tutorials/javagamestutorials/breakout
+public class Breakout extends JFrame implements WindowListener {
 
-    public Breakout() {
+    //VERY STRONGLY based on the example provided at http://zetcode.com/tutorials/javagamestutorial/breakout/
+
+    Breakout() {
         initGUI();
     }
 
     private void initGUI() {
-        add(new Frame());
+        add(new Game());
         setTitle("Game Test");
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -24,6 +26,19 @@ public class Breakout extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
-    }
 
+    }
+    public void windowClosing(WindowEvent e) {
+
+    }
+    public void windowClosed(WindowEvent e) {
+
+    }
+    public void windowOpened(WindowEvent e) {
+
+    }
+    public void windowIconified(WindowEvent e) {}
+    public void windowDeiconified(WindowEvent e) {}
+    public void windowActivated(WindowEvent e) {}
+    public void windowDeactivated(WindowEvent e) {}
 }

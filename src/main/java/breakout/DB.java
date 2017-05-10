@@ -31,8 +31,62 @@ public class DB implements Constants, SQLStatements {
             return null;
         }
 
-        //TODO finish this
-        return null;
+        try {
+            statement = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            //////////////////////////////
+            // For development purposes...
+            statement.execute(DROP_TABLE);
+            //////////////////////////////
+
+            statement.execute(CREATE_TABLE);
+
+            //////////////////////////////
+            // For demonstration purposes...
+            preparedInsert("27");
+            preparedInsert("42");
+            //////////////////////////////
+
+            rs = statement.executeQuery(SELECT_ALL);
+
+        } catch (SQLException se) {
+            System.out.println(se.getMessage());
+            return null;
+        }
+        // Everything went well; return the result set!
+        return rs;
     }
 
+    static ResultSet selectAll() {
+        try {
+            rs = statement.executeQuery(SELECT_ALL);
+        } catch (SQLException se) {
+            System.out.println(se.getMessage());
+            return null;
+        }
+        return rs;
+    }
+
+    static void preparedInsert(String score) {
+        try {
+            PreparedStatement ps = conn.prepareStatement(INSERT_INTO);
+            ps.setString(1, score);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException se) {}
+    }
+
+    static void shutdownDatabase() {
+        // Close ResultSet, Statement, and Connection objects
+        try {
+            if (rs != null)
+                rs.close();
+            if (statement != null)
+                statement.close();
+            if (conn != null)
+                conn.close();
+        } catch (SQLException se) {
+            System.out.println(se.getMessage());
+        }
+    }
 }

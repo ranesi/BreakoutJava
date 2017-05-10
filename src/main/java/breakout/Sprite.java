@@ -1,50 +1,50 @@
 package breakout;
 
-/**
- * Created by richa on 4/25/2017.
- */
-
+import javax.swing.*;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
 public class Sprite {
 
-    protected int x;
-    protected int y;
-    protected int i_width;
-    protected int i_height;
-    protected Image image;
+    int x;
+    int y;
+    int iWidth;
+    int iHeight;
+    Image image;
 
-    public void setX(int x) {
+    void setX(int x) {
         this.x = x;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    public void setY(int y) {
+    void setY(int y) {
         this.y = y;
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 
-    public int getWidth() {
-        return i_width;
+    int getWidth() {
+        return iWidth;
     }
 
-    public int getHeight() {
-        return i_height;
+    int getHeight() {
+        return iHeight;
     }
 
     Image getImage() {
         return image;
     }
 
-    Rectangle getRect() {
+    Rectangle getRectangle() {
         return new Rectangle(x, y,
                 image.getWidth(null), image.getHeight(null));
     }
 }
+
+

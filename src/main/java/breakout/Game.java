@@ -11,19 +11,22 @@ import java.util.TimerTask;
 /**
  * Created by richa on 4/25/2017.
  */
-public class Frame extends JPanel implements Constants {
+public class Game extends JPanel implements Constants {
+
+    //VERY STRONGLY based on the example provided at http://zetcode.com/tutorials/javagamestutorial/breakout/
 
     private Timer timer;
-    private String message = "NO MORE GAME";
-    private Ball ball;
-    private Paddle paddle;
+    private Projectile ball;
+    private Bat paddle;
     private Brick[] bricks;
     private int score;
     private int counter;
-    private boolean ingame = true;
+    private boolean inGame = true;
     private boolean win = false;
+    private Level levelGenerator;
+    private boolean[][] level;
 
-    public Frame() {
+    public Game() {
         initFrame();
     }
 
@@ -32,11 +35,22 @@ public class Frame extends JPanel implements Constants {
         addKeyListener(new TAdapter());
         setFocusable(true);
 
+        //get level
+        levelGenerator = new Level();
+        level = levelGenerator.getLevel();
+
+        //initialize scoring
         score = 100;
         counter = 0;
+
+        //create brick array
         bricks = new Brick[BRICK_NUM];
+
+        //JFrame setup
         setBackground(Color.WHITE);
         setDoubleBuffered(true);
+
+        //instantiate, configure timer
         timer = new Timer();
         timer.scheduleAtFixedRate(new ScheduleTask(), DELAY, PERIOD);
     }
@@ -48,13 +62,13 @@ public class Frame extends JPanel implements Constants {
     }
 
     private void gameInit() {
-        ball = new Ball();
-        paddle = new Paddle();
+        ball = new Projectile();
+        paddle = new Bat();
 
         int k = 0;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 8; j ++) {
-                bricks[k] = new Brick(j * 40 + 30, i * 10 + 50);
+                bricks[k] = new Brick(j * 40 + 30, i * 10 + 50, level[i][j]);
                 k++;
             }
         }
@@ -66,7 +80,7 @@ public class Frame extends JPanel implements Constants {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        if (ingame)
+        if (inGame)
             drawObjects(g2d);
         else
             gameOver(g2d);
@@ -108,7 +122,7 @@ public class Frame extends JPanel implements Constants {
                 (Constants.WIDTH - metr.stringWidth(scoreString)) / 2,
                 Constants.HEIGHT / 2);
         if (win) {
-            // database stuff
+            DB.preparedInsert(Integer.toString(score));
         }
     }
 
@@ -141,27 +155,27 @@ public class Frame extends JPanel implements Constants {
         }
 
         private void stopGame() {
-            ingame = false;
+            inGame = false;
             timer.cancel();
         }
 
         private void checkCollision() {
-            if (ball.getRect().getMaxY() > Constants.BOTTOM_EDGE)
+            if (ball.getRectangle().getMaxY() > Constants.BOTTOM_EDGE)
                 stopGame();
-            for (int i = 0, j = 0; i < BRICK_NUM; i ++) {
+            for (int i = 0, j = 0; i < BRICK_NUM; i++) {
                 if (bricks[i].isDestroyed())
                     j++;
                 if (j == BRICK_NUM) {
-                    message = "THIS ISN'T USED ANYMORE";
                     win = true;
                     stopGame();
                 }
             }
 
-            if ((ball.getRect().intersects(paddle.getRect()))) {
-                int paddleLPos = (int) paddle.getRect().getMinX();
-                int ballLPos = (int)ball.getRect().getMinX();
+            if ((ball.getRectangle().intersects(paddle.getRectangle()))) {
+                int paddleLPos = (int) paddle.getRectangle().getMinX();
+                int ballLPos = (int) ball.getRectangle().getMinX();
 
+                // determine delfection of ball
                 int first = paddleLPos + 8;
                 int second = paddleLPos + 16;
                 int third = paddleLPos + 24;
@@ -194,26 +208,29 @@ public class Frame extends JPanel implements Constants {
             }
 
             for (int i = 0; i < BRICK_NUM; i++) {
-                if ((ball.getRect()).intersects(bricks[i].getRect())) {
-                    int ballLeft = (int)ball.getRect().getMinX();
-                    int ballHeight = (int)ball.getRect().getHeight();
-                    int ballWidth = (int)ball.getRect().getWidth();
-                    int ballTop = (int)ball.getRect().getMinY();
+                if ((ball.getRectangle()).intersects(bricks[i].getRectangle())) {
+                    // get dimensions of ball
+                    int ballLeft = (int)ball.getRectangle().getMinX();
+                    int ballHeight = (int)ball.getRectangle().getHeight();
+                    int ballWidth = (int)ball.getRectangle().getWidth();
+                    int ballTop = (int)ball.getRectangle().getMinY();
 
                     Point pointRight = new Point(ballLeft + ballWidth + 1, ballTop);
                     Point pointLeft = new Point(ballLeft - 1, ballTop);
                     Point pointTop = new Point(ballLeft, ballTop - 1);
                     Point pointBottom = new Point(ballLeft, ballTop + ballHeight + 1);
 
+                    // determines which direction to deflect ball
+
                     if (!bricks[i].isDestroyed()) {
-                        if (bricks[i].getRect().contains(pointRight))
+                        if (bricks[i].getRectangle().contains(pointRight))
                             ball.setXDir(-1);
-                        else if (bricks[i].getRect().contains(pointLeft))
+                        else if (bricks[i].getRectangle().contains(pointLeft))
                             ball.setXDir(1);
 
-                        if (bricks[i].getRect().contains(pointTop))
+                        if (bricks[i].getRectangle().contains(pointTop))
                             ball.setYDir(1);
-                        else if (bricks[i].getRect().contains(pointBottom))
+                        else if (bricks[i].getRectangle().contains(pointBottom))
                             ball.setYDir(-1);
 
                         bricks[i].setDestroyed(true);

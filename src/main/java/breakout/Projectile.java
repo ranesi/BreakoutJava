@@ -5,20 +5,20 @@ import javax.swing.*;
 /**
  * Created by richa on 4/25/2017.
  */
-class Ball extends Sprite implements Constants {
+class Projectile extends Sprite implements Constants {
 
     private int xDir;
     private int yDir;
 
-    Ball() {
+    Projectile() {
         xDir = 1;
         yDir = -1;
 
         ImageIcon ii = new ImageIcon("ball.png");
         image = ii.getImage();
 
-        i_width = image.getWidth(null);
-        i_height = image.getHeight(null);
+        iWidth = image.getWidth(null);
+        iHeight = image.getHeight(null);
 
         resetState();
     }
@@ -31,7 +31,7 @@ class Ball extends Sprite implements Constants {
         if (x == 0)
             setXDir(1);
 
-        if (x == WIDTH - i_width)
+        if (x == WIDTH - iWidth)
             setXDir(-1);
 
         if (y == 0)
@@ -43,14 +43,16 @@ class Ball extends Sprite implements Constants {
         y = INIT_BALL_Y;
     }
 
+    int getXDir() { return this.xDir; }
     void setXDir(int x){
         xDir = x;
     }
 
+    int getYDir() { return this.yDir; }
     void setYDir(int y){
         yDir = y;
     }
 
-    int getXDir() { return this.xDir; }
-    int getYDir() { return this.yDir; }
+
+
 }
