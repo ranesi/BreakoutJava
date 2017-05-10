@@ -6,7 +6,7 @@ package breakout;
 
 import java.sql.*;
 
-public class DB implements Constants, SQLStatements {
+class DB implements Constants, SQLStatements {
 
     private static Connection conn = null;
     private static Statement statement = null;

@@ -16,6 +16,10 @@ public interface Constants {
     int INIT_BALL_Y = 300;
     int DELAY = 1000;
     int PERIOD = 5;
+
+    int BRICK = 1;
+    int I_BRICK = 2;
+    int AIR = 0;
     /////////////////////////////
 
     /////////DB STUFF////////////

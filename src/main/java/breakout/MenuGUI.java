@@ -31,9 +31,11 @@ public class MenuGUI extends JFrame {
         setTitle("Breakout 2k7");
         setSize(new Dimension(800, 300));
         setLocationRelativeTo(null);
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // init threads
+        // TODO stop this from murdering the ScheduledTask
         music = new Music();
 
         // table setup

@@ -23,8 +23,8 @@ public class Game extends JPanel implements Constants {
     private int counter;
     private boolean inGame = true;
     private boolean win = false;
-    private Level levelGenerator;
-    private boolean[][] level;
+    private int[][] level;
+    private int invulnerableBricks = 0;
 
     public Game() {
         initFrame();
@@ -36,7 +36,7 @@ public class Game extends JPanel implements Constants {
         setFocusable(true);
 
         //get level
-        levelGenerator = new Level();
+        Level levelGenerator = new Level();
         level = levelGenerator.getLevel();
 
         //initialize scoring
@@ -65,10 +65,18 @@ public class Game extends JPanel implements Constants {
         ball = new Projectile();
         paddle = new Bat();
 
+        //BUILD LEVEL
         int k = 0;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 8; j ++) {
-                bricks[k] = new Brick(j * 40 + 30, i * 10 + 50, level[i][j]);
+                if (level[i][j] == AIR) {
+                    bricks[k] = new Brick(j * 40 + 30, i * 10 + 50, true, true);
+                } else if (level[i][j] == BRICK) {
+                    bricks[k] = new Brick(j * 40 + 30, i * 10 + 50, false, true);
+                } else if (level[i][j] == I_BRICK) {
+                    bricks[k] = new Brick(j * 40 + 30, i * 10 + 50, false, false);
+                    invulnerableBricks++;
+                }
                 k++;
             }
         }
@@ -148,7 +156,8 @@ public class Game extends JPanel implements Constants {
             checkCollision();
             repaint();
             counter++;
-            if (counter == 250){
+            if (counter == 350){
+                // Decrease score, reset counter to 0
                 score--;
                 counter = 0;
             }
@@ -165,43 +174,44 @@ public class Game extends JPanel implements Constants {
             for (int i = 0, j = 0; i < BRICK_NUM; i++) {
                 if (bricks[i].isDestroyed())
                     j++;
-                if (j == BRICK_NUM) {
+                if (j + invulnerableBricks == BRICK_NUM) {
                     win = true;
                     stopGame();
                 }
             }
 
             if ((ball.getRectangle().intersects(paddle.getRectangle()))) {
-                int paddleLPos = (int) paddle.getRectangle().getMinX();
-                int ballLPos = (int) ball.getRectangle().getMinX();
+
+                int batLeftmostPosition = (int) paddle.getRectangle().getMinX();
+                int projectileLeftmostPosition = (int) ball.getRectangle().getMinX();
 
                 // determine delfection of ball
-                int first = paddleLPos + 8;
-                int second = paddleLPos + 16;
-                int third = paddleLPos + 24;
-                int fourth = paddleLPos + 32;
+                int first = batLeftmostPosition + 8;
+                int second = batLeftmostPosition + 16;
+                int third = batLeftmostPosition + 24;
+                int fourth = batLeftmostPosition + 32;
 
-                if (ballLPos < first) {
+                if (projectileLeftmostPosition < first) {
                     ball.setXDir(-1);
                     ball.setYDir(-1);
                 }
 
-                if (ballLPos >= first && ballLPos < second) {
+                if (projectileLeftmostPosition >= first && projectileLeftmostPosition < second) {
                     ball.setXDir(-1);
                     ball.setYDir(-1 * ball.getYDir());
                 }
 
-                if (ballLPos >= second && ballLPos < third) {
+                if (projectileLeftmostPosition >= second && projectileLeftmostPosition < third) {
                     ball.setXDir(0);
                     ball.setYDir(-1);
                 }
 
-                if (ballLPos >= third && ballLPos < fourth) {
+                if (projectileLeftmostPosition >= third && projectileLeftmostPosition < fourth) {
                     ball.setXDir(1);
                     ball.setYDir(-1 * ball.getYDir());
                 }
 
-                if (ballLPos > fourth) {
+                if (projectileLeftmostPosition > fourth) {
                     ball.setXDir(1);
                     ball.setYDir(-1);
                 }
@@ -215,13 +225,13 @@ public class Game extends JPanel implements Constants {
                     int ballWidth = (int)ball.getRectangle().getWidth();
                     int ballTop = (int)ball.getRectangle().getMinY();
 
+                    // determine where the ball is
                     Point pointRight = new Point(ballLeft + ballWidth + 1, ballTop);
                     Point pointLeft = new Point(ballLeft - 1, ballTop);
                     Point pointTop = new Point(ballLeft, ballTop - 1);
                     Point pointBottom = new Point(ballLeft, ballTop + ballHeight + 1);
 
-                    // determines which direction to deflect ball
-
+                    // determines which direction to deflect ball, destroy brick
                     if (!bricks[i].isDestroyed()) {
                         if (bricks[i].getRectangle().contains(pointRight))
                             ball.setXDir(-1);
@@ -233,7 +243,9 @@ public class Game extends JPanel implements Constants {
                         else if (bricks[i].getRectangle().contains(pointBottom))
                             ball.setYDir(-1);
 
-                        bricks[i].setDestroyed(true);
+                        if (bricks[i].isDestroyable()) {
+                            bricks[i].setDestroyed(true);
+                        }
                     }
                 }
             }

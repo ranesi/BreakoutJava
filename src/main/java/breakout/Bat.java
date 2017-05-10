@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 /**
  * Created by richa on 4/25/2017.
  */
-public class Bat extends Sprite implements Constants {
+class Bat extends Sprite implements Constants {
 
     //VERY STRONGLY based on the example provided at http://zetcode.com/tutorials/javagamestutorial/breakout/
 

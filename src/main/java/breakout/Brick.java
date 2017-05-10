@@ -3,30 +3,41 @@ package breakout;
 import javax.swing.*;
 
 
-public class Brick extends Sprite {
+class Brick extends Sprite {
 
     //VERY STRONGLY based on the example provided at http://zetcode.com/tutorials/javagamestutorial/breakout/
 
     private boolean destroyed;
+    private boolean destroyable;
 
-    public Brick(int x, int y, boolean destroyed) {
+    Brick(int x, int y, boolean destroyed, boolean destroyable) {
         this.x = x;
         this.y = y;
 
-        ImageIcon ii = new ImageIcon("brick.png");
+        this.destroyable = destroyable;
+
+        String filename = "brick.png";
+
+        if (!destroyable)
+            filename = "ibrick.png";
+
+        ImageIcon ii = new ImageIcon(filename);
         image = ii.getImage();
 
         iWidth = image.getWidth(null);
         iHeight = image.getHeight(null);
 
+
         this.destroyed = destroyed;
     }
 
-    public boolean isDestroyed() {
+    boolean isDestroyed() {
         return destroyed;
     }
 
-    public void setDestroyed(boolean destroyed) {
+    boolean isDestroyable() { return destroyable; }
+
+    void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
 

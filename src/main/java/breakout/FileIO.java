@@ -11,9 +11,9 @@ package breakout;
 
 import java.io.*;
 
-public class FileIO implements Constants {
+class FileIO implements Constants {
 
-    public static String[] getAuth(){
+    static String[] getAuth(){
         StringBuilder sb = new StringBuilder();
         String fromFile = "";
         try (BufferedReader br = new BufferedReader(new FileReader(DB_AUTH_FILE))) {

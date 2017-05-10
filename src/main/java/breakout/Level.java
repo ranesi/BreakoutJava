@@ -6,54 +6,57 @@ import java.util.Random;
  * Created by richa on 5/4/2017.
  */
 public class Level implements Constants {
-    private boolean[][] level;
-    private ArrayList<boolean[][]> levels;
+    private int[][] level;
+    private ArrayList<int[][]> levels;
     private Random random;
 
     Level(){
         random = new Random();
         levels = new ArrayList<>();
 
-        levels.add(new boolean[][]{
-                {false, false, false, false, false, false, false, false},
-                {false, true, true, false, true, true, true, false},
-                {false, true, true, false, true, true, true, false},
-                {false, false, false, false, false, false, false, false},
-                {true, true, true, false, true, true, true, false},
-                {true, true, true, false, true, true, true, false},
-                {true, true, true, false, true, true, true, false},
-                {true, true, true, false, true, true, true, false},
-                {false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false},
+        levels.add(new int[][]{
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {0,0,0,0,0,0,0,0},
+                {2,2,2,0,0,2,2,2},
         });
-        levels.add(new boolean[][]{
-                {false, true, false, true, false, true, false, true},
-                {true, false, true, false, true, false, true, false},
-                {false, true, false, true, false, true, false, true},
-                {true, false, true, false, true, false, true, false},
-                {false, true, false, true, false, true, false, true},
-                {true, false, true, false, true, false, true, false},
-                {false, true, false, true, false, true, false, true},
-                {true, false, true, false, true, false, true, false},
-                {false, true, false, true, false, true, false, true},
-                {true, true, true, true, true, true, true, true},
+
+        levels.add(new int[][]{
+                {1,1,1,1,1,1,1,1},
+                {2,1,1,1,1,1,1,2},
+                {1,1,1,1,1,1,1,1},
+                {1,2,2,1,1,2,2,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,2,2,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {2,2,1,1,1,1,2,2},
+                {1,0,0,0,0,0,0,1},
+                {1,1,1,0,0,1,1,1},
         });
-        levels.add(new boolean[][]{
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false},
-                {false, false, false, false, false, false, false, false}
+
+        levels.add(new int[][]{
+                {2,2,2,2,2,2,2,2},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
+                {1,1,1,1,1,1,1,1},
         });
+
 
     }
 
-    public boolean[][] getLevel(){
+    public int[][] getLevel(){
         int index = random.nextInt(levels.size());
         return levels.get(index);
     }

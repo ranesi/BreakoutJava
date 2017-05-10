@@ -5,7 +5,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
-public class Sprite {
+class Sprite {
 
     int x;
     int y;
