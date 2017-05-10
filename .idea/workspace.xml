@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dde83489-0755-4639-827b-2f3dcf6dfdf5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ibrick.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -801,7 +800,7 @@
       <workItem from="1493859271302" duration="5933000" />
       <workItem from="1493900188094" duration="5671000" />
       <workItem from="1494031563003" duration="645000" />
-      <workItem from="1494379682201" duration="14287000" />
+      <workItem from="1494379682201" duration="14360000" />
     </task>
     <task id="LOCAL-00001" summary="modified constants">
       <created>1493849624071</created>
@@ -873,11 +872,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494396035369</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added a readme.md; also included invulnerable brick image">
+      <created>1494396399725</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1494396399725</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37524000" />
+    <option name="totallyTimeSpent" value="37597000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
@@ -931,7 +937,8 @@
     <MESSAGE value="Finished menu / levels" />
     <MESSAGE value="fixed a redundant bracket!" />
     <MESSAGE value="there are now invulnerable bricks" />
-    <option name="LAST_COMMIT_MESSAGE" value="there are now invulnerable bricks" />
+    <MESSAGE value="added a readme.md; also included invulnerable brick image" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a readme.md; also included invulnerable brick image" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
